@@ -1,0 +1,22 @@
+{
+  "name": "משפחה ביחד",
+  "short_name": "משפחה",
+  "description": "תיאום ותיעוד אירועים משפחתיים",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f0ebe4",
+  "theme_color": "#1a1a1a",
+  "orientation": "portrait",
+  "lang": "he",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%231a1a1a'/><text y='130' x='96' font-size='110' text-anchor='middle'>🏡</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "social"],
+  "screenshots": []
+}
