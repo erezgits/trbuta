@@ -1071,7 +1071,6 @@ window.openSheet=function(id){
   document.getElementById(id).classList.add('open');
 };
 window.closeSheet=function(id){document.getElementById(id).classList.remove('open');addToGroup=null;};
-window.openSheet=window.openSheet;
 
 let _t;
 window.toast=function(msg){clearTimeout(_t);const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');_t=setTimeout(()=>el.classList.remove('show'),2500);};
@@ -1118,7 +1117,7 @@ window.openEditEvent=function(evId){
   document.getElementById('ee-time').value=ev.time||'';
   document.getElementById('ee-loc').value=ev.location||'';
   document.getElementById('ee-note').value=ev.note||'';
-  openSheet('sh-ev-edit');
+  window.openSheet('sh-ev-edit');
 };
 window.saveEditEvent=async function(){
   if(!editEvId)return;
@@ -1132,7 +1131,7 @@ window.saveEditEvent=async function(){
     location:document.getElementById('ee-loc').value,
     note:document.getElementById('ee-note').value,
   });
-  setSyncDot('ok');closeSheet('sh-ev-edit');toast('✅ האירוע עודכן!');
+  setSyncDot('ok');window.closeSheet('sh-ev-edit');toast('✅ האירוע עודכן!');
 };
 
 // ══ EDIT MEMBER ══
@@ -1146,7 +1145,7 @@ window.openEditMember=function(memId){
   // build group select
   const s=document.getElementById('em-group');
   s.innerHTML='<option value="">ללא קבוצה</option>'+groups.map(g=>`<option value="${g.id}" ${m.groupId===g.id?'selected':''}>${g.emoji} ${g.name}</option>`).join('');
-  openSheet('sh-mem-edit');
+  window.openSheet('sh-mem-edit');
 };
 window.saveEditMember=async function(){
   if(!editMemId)return;
@@ -1159,7 +1158,7 @@ window.saveEditMember=async function(){
     phone:document.getElementById('em-phone').value,
     groupId,
   });
-  setSyncDot('ok');closeSheet('sh-mem-edit');
+  setSyncDot('ok');window.closeSheet('sh-mem-edit');
   if(editMemId===meId)updateWhoBar();
   toast('✅ הפרטים עודכנו!');
 };
@@ -1174,7 +1173,7 @@ window.openEditGroup=function(grpId){
   // color picker
   editGrpColor=g.color;
   document.getElementById('colorPickerEdit').innerHTML=PAL.map(c=>`<div class="cp-swatch ${c===g.color?'on':''}" style="background:${c}" onclick="pickColorEdit('${c}',this)"></div>`).join('');
-  openSheet('sh-grp-edit');
+  window.openSheet('sh-grp-edit');
 };
 window.pickColorEdit=function(c,el){editGrpColor=c;document.querySelectorAll('#colorPickerEdit .cp-swatch').forEach(s=>s.classList.remove('on'));el.classList.add('on');};
 window.saveEditGroup=async function(){
@@ -1183,7 +1182,7 @@ window.saveEditGroup=async function(){
   const emoji=document.getElementById('eg-emoji').value.trim()||'👨‍👩‍👧';
   setSyncDot('syncing');
   await update(ref(db,'groups/'+editGrpId),{name,emoji,color:editGrpColor||PAL[0]});
-  setSyncDot('ok');closeSheet('sh-grp-edit');toast('✅ הקבוצה עודכנה!');
+  setSyncDot('ok');window.closeSheet('sh-grp-edit');toast('✅ הקבוצה עודכנה!');
 };
 
 // ══ START ══
